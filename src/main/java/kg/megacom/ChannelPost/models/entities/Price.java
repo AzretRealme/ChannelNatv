@@ -1,0 +1,21 @@
+package kg.megacom.ChannelPost.models.entities;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Data
+@Entity
+@Table(name = "prices")
+public class Price {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "id_channels")
+    private Channel channel;
+    private Date startDate;
+    private Date endDate;
+    private double price;
+}
