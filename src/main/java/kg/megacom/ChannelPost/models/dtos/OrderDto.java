@@ -1,4 +1,4 @@
-package kg.megacom.ChannelPost.models.entities;
+package kg.megacom.ChannelPost.models.dtos;
 
 import kg.megacom.ChannelPost.models.enums.Status;
 import lombok.Data;
@@ -9,23 +9,14 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@Entity
-@Table(name = "orders")
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class OrderDto {
     private Long id;
     private String text;
     private String name;
     private String phone;
     private String email;
     private double totalPrice;
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     private Date editDate;
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     private Date addDate;
-    @Enumerated(EnumType.STRING)
     private Status status;
 }
