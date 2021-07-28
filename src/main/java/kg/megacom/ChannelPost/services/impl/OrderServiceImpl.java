@@ -42,11 +42,11 @@ public class OrderServiceImpl implements OrderService {
         orderDto.setText(inputOrderDto.getText());
         orderDto.setStatus(Status.NEW);
 
-//        List<OrderDetailDto> orderDetailDtoList = inputOrderDto.getChannels().stream().map(x->{
-//            OrderDetailDto orderDetailDto = new OrderDetailDto();
-//            orderDetailDto.setChannelDto(channelService.findById(x.getChannel_id()));
-//            orderDetailDto.se
-//        });
+        List<OrderDetailDto> orderDetailDtoList = inputOrderDto.getChannels().stream().map(x->{
+            OrderDetailDto orderDetailDto = new OrderDetailDto();
+            orderDetailDto.setChannelDto(channelService.findById(x.getChannel_id()));
+            orderDetailDto.setPrice(calculatePrice(x, inputOrderDto.getText(), ));
+        });
         return null;
     }
 
@@ -57,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
         //discountDtoList.
         double price = priceService.findByChannelId(channelDto.getId()).getPrice();
 
-        int percent;
+        int percent = 0;
         for(int i = 0; i < discountDtoList.size(); i ++){
 
             int minDays = discountDtoList.get(i).getMinDays();
@@ -70,6 +70,8 @@ public class OrderServiceImpl implements OrderService {
                 percent = discountDtoList.get(i).getPercent();
             }
         }
-        return price;
+        return (100 - percent)*(price * symbolCount);
     }
+
+
 }
