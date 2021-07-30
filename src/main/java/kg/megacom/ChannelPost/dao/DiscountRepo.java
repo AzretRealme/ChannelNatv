@@ -11,6 +11,9 @@ import java.util.List;
 @Repository
 public interface DiscountRepo extends JpaRepository<Discount, Long> {
     List<Discount> findByChannelId(Long channelId);
-    @Query(value = "SELECT * FROM discounts ds WHERE ds.id_channels = ?1 AND CURRENT_TIMESTAMP BETWEEN start_date AND end_date order by min_day asc", nativeQuery = true)
+//    @Query(value = "SELECT * FROM discounts ds WHERE ds.id_channels = ?1 AND CURRENT_TIMESTAMP BETWEEN start_date AND end_date order by min_days asc", nativeQuery = true)
+//    List<Discount> allCurrentlyActiveDiscounts(Long id);
+
+    @Query(value = "SELECT * FROM discounts ds WHERE ds.id_channels = ?1 order by min_days asc", nativeQuery = true)
     List<Discount> allCurrentlyActiveDiscounts(Long id);
 }

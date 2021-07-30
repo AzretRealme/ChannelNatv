@@ -1,7 +1,7 @@
 package kg.megacom.ChannelPost.services.impl;
 
 import kg.megacom.ChannelPost.dao.PriceRepo;
-import kg.megacom.ChannelPost.mappers.PriceMapper;
+import kg.megacom.ChannelPost.mappers.PriceMapperByHand;
 import kg.megacom.ChannelPost.models.dtos.PriceDto;
 import kg.megacom.ChannelPost.models.dtos.inputForChannel.InputPriceDto;
 import kg.megacom.ChannelPost.services.ChannelService;
@@ -19,14 +19,17 @@ public class PriceServiceImpl implements PriceService {
     @Autowired
     private ChannelService channelService;
 
+    @Autowired
+    private PriceMapperByHand priceMapperByHand;
+
     @Override
     public PriceDto findByChannelId(Long id) {
-        return PriceMapper.INSTANCE.toDto(priceRepo.findByChannelId(id));
+        return priceMapperByHand.toDto(priceRepo.findByChannelId(id));
     }
 
     @Override
     public List<PriceDto> findAllCurrentlyActivePrices() {
-        return PriceMapper.INSTANCE.toDtos(priceRepo.findAllCurrentlyActivePrices());
+        return priceMapperByHand.toDtos(priceRepo.findAllCurrentlyActivePrices());
     }
 
     @Override
@@ -36,6 +39,13 @@ public class PriceServiceImpl implements PriceService {
         priceDto.setPrice(inputPriceDto.getPrice());
         priceDto.setStartDate(inputPriceDto.getStartDate());
         priceDto.setEndDate(inputPriceDto.getEndDate());
-        return PriceMapper.INSTANCE.toDto(priceRepo.save(PriceMapper.INSTANCE.toEntity(priceDto)));
+        return priceMapperByHand.toDto(priceRepo.save(priceMapperByHand.toEntity(priceDto)));
     }
+
+    @Override
+    public List<PriceDto> findAll() {
+        return priceMapperByHand.toDtos(priceRepo.findAll());
+    }
+
+
 }

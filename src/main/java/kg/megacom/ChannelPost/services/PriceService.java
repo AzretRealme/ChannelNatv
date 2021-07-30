@@ -9,4 +9,5 @@ public interface PriceService {
     PriceDto findByChannelId(Long id);
     List<PriceDto> findAllCurrentlyActivePrices();
     PriceDto savePriceForChannel(InputPriceDto inputPriceDto);
+    List<PriceDto> findAll();
 }

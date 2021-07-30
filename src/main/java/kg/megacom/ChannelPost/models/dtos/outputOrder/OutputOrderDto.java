@@ -12,5 +12,5 @@ public class OutputOrderDto {
     private String phone;
     private String email;
     private double total_price;
-    private List<InputChannelDto> channels;
+    private List<OutputChannelDtoForOrder> outputChannelDtoForOrderList;
 }

@@ -3,6 +3,7 @@ package kg.megacom.ChannelPost.services.impl;
 import kg.megacom.ChannelPost.exceptions.ChannelNotFoundException;
 import kg.megacom.ChannelPost.dao.ChannelRepo;
 import kg.megacom.ChannelPost.mappers.ChannelMapper;
+import kg.megacom.ChannelPost.mappers.ChannelMapperByHand;
 import kg.megacom.ChannelPost.models.dtos.ChannelDto;
 import kg.megacom.ChannelPost.models.dtos.PriceDto;
 import kg.megacom.ChannelPost.models.dtos.channelsOutput.OutputChannelDto;
@@ -25,12 +26,18 @@ public class ChannelServiceImpl implements ChannelService {
     private PriceService priceService;
     @Autowired
     private DiscountService discountService;
+    @Autowired
+    private ChannelMapperByHand channelMapperByHand;
     @Override
     public List<OutputChannelDto> findAll() {
-        List<PriceDto> priceDtoList = priceService.findAllCurrentlyActivePrices().stream().filter(x -> x.getChannelDto().isActive()).collect(Collectors.toList());
+//        List<PriceDto> priceDtoList = priceService.findAllCurrentlyActivePrices().stream().filter(x -> x.getChannelDto().isActive()).collect(Collectors.toList());
+        List<PriceDto> priceDtoList = priceService.findAll().stream().filter(x -> x.getChannelDto().isActive()).collect(Collectors.toList());
+        System.out.println(priceService.findAllCurrentlyActivePrices());
+        System.out.println(priceDtoList);
         List<OutputChannelDto> outputChannelDtos = priceDtoList.stream().map(x->{
             OutputChannelDto outputChannelDto = new OutputChannelDto();
             outputChannelDto.setId(x.getChannelDto().getId());
+            System.out.println(outputChannelDto);
             outputChannelDto.setOutputDiscountDtoList( discountService.findAllCurrentlyActiveDiscounts(x.getChannelDto().getId()).
                     stream().map(y ->{
                 OutputDiscountDto outputDiscountDto = new OutputDiscountDto();
@@ -41,28 +48,34 @@ public class ChannelServiceImpl implements ChannelService {
             outputChannelDto.setName(x.getChannelDto().getName());
             outputChannelDto.setPhoto(x.getChannelDto().getPhoto());
             outputChannelDto.setPrice(x.getPrice());
+            System.out.println(outputChannelDto);
+
+            outputChannelDto.setName(x.getChannelDto().getName());
             return outputChannelDto;
         }).collect(Collectors.toList());
+
+        System.out.println(outputChannelDtos);
 
         return outputChannelDtos;
     }
 
     @Override
     public ChannelDto saveChannel(ChannelDto channelDto) {
-//        ChannelDto lastChannelInTheList = findLastChannelInTheList();
-//        if(lastChannelInTheList == null){
-//            channelDto.setOrderNum(1);
-//        }else {
-//            channelDto.setOrderNum(lastChannelInTheList.getOrderNum() + 1);
-//        }
+        channelDto.setActive(true);
+        ChannelDto lastChannelInTheList = findLastChannelInTheList();
+        if(lastChannelInTheList == null){
+            channelDto.setOrderNum(1);
+        }else {
+            channelDto.setOrderNum(lastChannelInTheList.getOrderNum() + 1);
+        }
 
-        Channel channel = ChannelMapper.INSTANCE.toEntity(channelDto);
+        Channel channel = channelMapperByHand.toEntity(channelDto);
         System.out.println(channel);
 
         Channel channelSaved = channelRepo.save(channel);
         System.out.println(channelSaved);
 
-        return ChannelMapper.INSTANCE.toDto(channelSaved);
+        return channelMapperByHand.toDto(channelSaved);
     }
 
 
@@ -73,17 +86,17 @@ public class ChannelServiceImpl implements ChannelService {
         if(channel == null){
             return null;
         }
-        return ChannelMapper.INSTANCE.toDto(channel);
+        return channelMapperByHand.toDto(channel);
     }
 
     @Override
     public ChannelDto findById(Long id) {
-        return ChannelMapper.INSTANCE.toDto(channelRepo.findById(id).orElseThrow(() -> new ChannelNotFoundException("Channel not found!!!")));
+        return channelMapperByHand.toDto(channelRepo.findById(id).get());
     }
 
     @Override
     public List<ChannelDto> findAllChannelDtos() {
-        return ChannelMapper.INSTANCE.toDtos(channelRepo.findAll());
+        return channelMapperByHand.toDtos(channelRepo.findAll());
     }
 
 

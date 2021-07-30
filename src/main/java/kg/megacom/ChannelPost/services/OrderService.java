@@ -7,5 +7,6 @@ import kg.megacom.ChannelPost.models.dtos.outputOrder.OutputOrderDto;
 public interface OrderService {
     OutputOrderDto saveOrder(InputOrderDto inputOrderDto);
 
-    double calculatePrice(ChannelDto channelDto, String txt, int daysCount);
+    double calculatePrice(Long id, String txt, int daysCount);
+
 }
