@@ -1,7 +1,7 @@
 package kg.megacom.ChannelGo.mappers.impl;
 
-import kg.megacom.ChannelGo.mappers.ChannelMapper;
-import kg.megacom.ChannelGo.mappers.DiscountMapper;
+import kg.megacom.ChannelGo.mappers.ChannelMapperByHand;
+import kg.megacom.ChannelGo.mappers.DiscountMapperByHand;
 import kg.megacom.ChannelGo.models.dtos.DiscountDto;
 import kg.megacom.ChannelGo.models.entities.Discount;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class DiscountMapperImpl implements DiscountMapper {
+public class DiscountMapperByHandImpl implements DiscountMapperByHand {
     @Autowired
-    private ChannelMapper channelMapperByHand;
+    private ChannelMapperByHand channelMapperByHand;
     @Override
     public Discount toEntity(DiscountDto dto) {
         Discount discount = new Discount();

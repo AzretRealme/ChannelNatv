@@ -1,6 +1,6 @@
 package kg.megacom.ChannelGo.mappers.impl;
 
-import kg.megacom.ChannelGo.mappers.ChannelMapper;
+import kg.megacom.ChannelGo.mappers.ChannelMapperByHand;
 import kg.megacom.ChannelGo.mappers.OrderDetailMapper;
 import kg.megacom.ChannelGo.mappers.OrderMapper;
 import kg.megacom.ChannelGo.models.dtos.OrderDetailDto;
@@ -16,7 +16,7 @@ public class OrderDetailMapperImpl implements OrderDetailMapper {
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
-    private ChannelMapper channelMapperByHand;
+    private ChannelMapperByHand channelMapperByHand;
     @Override
     public OrderDetail toEntity(OrderDetailDto orderDetailDto) {
         OrderDetail orderDetail = new OrderDetail();

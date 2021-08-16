@@ -5,7 +5,7 @@ import kg.megacom.ChannelGo.models.entities.Channel;
 
 import java.util.List;
 
-public interface ChannelMapper {
+public interface ChannelMapperByHand {
     Channel toEntity(ChannelDto channelDto);
     ChannelDto toDto(Channel channel);
 

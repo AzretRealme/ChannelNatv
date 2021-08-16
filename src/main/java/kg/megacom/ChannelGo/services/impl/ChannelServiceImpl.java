@@ -1,7 +1,7 @@
 package kg.megacom.ChannelGo.services.impl;
 
 import kg.megacom.ChannelGo.dao.ChannelRepo;
-import kg.megacom.ChannelGo.mappers.ChannelMapper;
+import kg.megacom.ChannelGo.mappers.ChannelMapperByHand;
 import kg.megacom.ChannelGo.models.dtos.ChannelDto;
 import kg.megacom.ChannelGo.models.dtos.PriceDto;
 import kg.megacom.ChannelGo.models.dtos.channelsOutput.OutputChannelDto;
@@ -25,7 +25,7 @@ public class ChannelServiceImpl implements ChannelService {
     @Autowired
     private DiscountService discountService;
     @Autowired
-    private ChannelMapper channelMapperByHand;
+    private ChannelMapperByHand channelMapperByHand;
     @Override
     public List<OutputChannelDto> findAll() {
 //        List<PriceDto> priceDtoList = priceService.findAllCurrentlyActivePrices().stream().filter(x -> x.getChannelDto().isActive()).collect(Collectors.toList());

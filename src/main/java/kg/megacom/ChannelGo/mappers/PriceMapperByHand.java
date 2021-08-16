@@ -5,7 +5,7 @@ import kg.megacom.ChannelGo.models.entities.Price;
 
 import java.util.List;
 
-public interface PriceMapper {
+public interface PriceMapperByHand {
 
     Price toEntity(PriceDto priceDto);
     PriceDto toDto(Price price);

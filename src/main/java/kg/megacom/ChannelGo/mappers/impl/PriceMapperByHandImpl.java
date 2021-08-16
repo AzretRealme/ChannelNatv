@@ -1,7 +1,7 @@
 package kg.megacom.ChannelGo.mappers.impl;
 
-import kg.megacom.ChannelGo.mappers.ChannelMapper;
-import kg.megacom.ChannelGo.mappers.PriceMapper;
+import kg.megacom.ChannelGo.mappers.ChannelMapperByHand;
+import kg.megacom.ChannelGo.mappers.PriceMapperByHand;
 import kg.megacom.ChannelGo.models.dtos.PriceDto;
 import kg.megacom.ChannelGo.models.entities.Price;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PriceMapperImpl implements PriceMapper {
+public class PriceMapperByHandImpl implements PriceMapperByHand {
     @Autowired
-    private ChannelMapper channelMapperByHand;
+    private ChannelMapperByHand channelMapperByHand;
 
     @Override
     public Price toEntity(PriceDto priceDto) {

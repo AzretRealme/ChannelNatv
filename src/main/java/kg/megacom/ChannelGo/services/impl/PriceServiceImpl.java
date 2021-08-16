@@ -1,7 +1,7 @@
 package kg.megacom.ChannelGo.services.impl;
 
 import kg.megacom.ChannelGo.dao.PriceRepo;
-import kg.megacom.ChannelGo.mappers.PriceMapper;
+import kg.megacom.ChannelGo.mappers.PriceMapperByHand;
 import kg.megacom.ChannelGo.models.dtos.PriceDto;
 import kg.megacom.ChannelGo.models.dtos.inputForChannel.InputPriceDto;
 import kg.megacom.ChannelGo.services.ChannelService;
@@ -20,7 +20,7 @@ public class PriceServiceImpl implements PriceService {
     private ChannelService channelService;
 
     @Autowired
-    private PriceMapper priceMapperByHand;
+    private PriceMapperByHand priceMapperByHand;
 
     @Override
     public PriceDto findByChannelId(Long id) {

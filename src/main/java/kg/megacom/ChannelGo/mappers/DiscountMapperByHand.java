@@ -5,7 +5,7 @@ import kg.megacom.ChannelGo.models.entities.Discount;
 
 import java.util.List;
 
-public interface DiscountMapper {
+public interface DiscountMapperByHand {
 
     Discount toEntity(DiscountDto dto);
     DiscountDto toDto(Discount entities);

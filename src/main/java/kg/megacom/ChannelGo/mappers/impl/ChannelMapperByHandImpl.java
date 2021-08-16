@@ -1,6 +1,6 @@
 package kg.megacom.ChannelGo.mappers.impl;
 
-import kg.megacom.ChannelGo.mappers.ChannelMapper;
+import kg.megacom.ChannelGo.mappers.ChannelMapperByHand;
 import kg.megacom.ChannelGo.models.dtos.ChannelDto;
 import kg.megacom.ChannelGo.models.entities.Channel;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ChannelMapperImpl implements ChannelMapper {
+public class ChannelMapperByHandImpl implements ChannelMapperByHand {
     @Override
     public Channel toEntity(ChannelDto channelDto) {
         Channel channel = new Channel();

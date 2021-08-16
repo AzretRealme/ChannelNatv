@@ -1,7 +1,7 @@
 package kg.megacom.ChannelGo.services.impl;
 
 import kg.megacom.ChannelGo.dao.DiscountRepo;
-import kg.megacom.ChannelGo.mappers.DiscountMapper;
+import kg.megacom.ChannelGo.mappers.DiscountMapperByHand;
 import kg.megacom.ChannelGo.models.dtos.DiscountDto;
 import kg.megacom.ChannelGo.models.dtos.inputForChannel.InputDiscountDto;
 import kg.megacom.ChannelGo.services.ChannelService;
@@ -19,7 +19,7 @@ public class DiscountServiceImpl implements DiscountService {
     private ChannelService channelService;
 
     @Autowired
-    private DiscountMapper discountMapperByHand;
+    private DiscountMapperByHand discountMapperByHand;
     @Override
     public List<DiscountDto> findAllCurrentlyActiveDiscounts(Long id) {
         return discountMapperByHand.toDtos(discountRepo.allCurrentlyActiveDiscounts(id));
